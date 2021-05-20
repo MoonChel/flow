@@ -1,0 +1,6 @@
+# base
+fastapi
+uvicorn[standard]
+
+# test
+pytest

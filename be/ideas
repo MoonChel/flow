@@ -1,0 +1,41 @@
+price >= 100 and name == user.username
+
+[
+    {
+        "left": {
+            "type": "field",
+            "value": "price"
+        },
+        "right": {
+            "type": "literal",
+            "value": 100
+        },
+        "operator": "greater_equal"
+    },
+    "and",
+    {
+        "left": {
+            "type": "field",
+            "value": "name"
+        },
+        "right": {
+            "type": "context_field",
+            "value": "user.username"
+        },
+        "operator": "equality"
+    }
+]
+
+
+
+# process schema
+# list of steps
+# each step is either:
+#   1. form
+#   2. conditional step with process schema inside
+
+
+# form is list of fields
+# where field is either:
+#   1. input field
+#   2. group field - for inline form
