@@ -1,0 +1,16 @@
+{
+    "process": {
+        "name": "recruitment",
+        "steps": [
+            {
+                "name": "fill_form",
+                "next": "save_results",
+                "form": "recruitment_form.json"
+            },
+            {
+                "name": "save_results",
+                "next": "finish_process"
+            }
+        ]
+    }
+}
