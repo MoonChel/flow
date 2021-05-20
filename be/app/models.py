@@ -13,9 +13,19 @@ class Form(BaseModel):
 
 class Step(BaseModel):
     name: str
+    active: bool
     form: Optional[Form]
 
 
 class Process(BaseModel):
     name: str
     steps: List[Step]
+
+    def get_active_step(self) -> Optional[Step]:
+        step = None
+
+        for s in self.steps:
+            if s.active:
+                step = s
+
+        return step
