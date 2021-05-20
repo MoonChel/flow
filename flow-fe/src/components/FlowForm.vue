@@ -1,49 +1,48 @@
 <template>
-  <FormulateForm>
-    <div v-for="field in form.fields" :key="field.name">
-      <FormulateInput
-        :label="field.label"
-        :type="field.type"
-        :validation="field.validation"
-      />
-    </div>
+  <FormulateForm v-model="formValues" @submit="submitForm">
+    <template v-if="step">
+      <div v-for="field in step.form.fields" :key="field.name">
+        <FormulateInput
+          :label="field.label"
+          :type="field.type"
+          :name="field.name"
+          :validation="field.validation"
+        />
+      </div>
+    </template>
+    <br />
+
+    <FormulateInput type="submit" label="Submit" />
 
     <br />
-    <FormulateInput type="submit" :label="form.submit.label" />
+
+    {{ step }}
   </FormulateForm>
 </template>
 
 <script>
-// recruitment form processing
+import api from "@/api";
+
 export default {
+  created() {
+    api.getActiveStep().then((response) => {
+      this.step = response.data;
+    });
+  },
+
   data() {
     return {
-      form: {
-        submit: {
-          label: "Submit",
-        },
-        fields: [
-          {
-            label: "First name",
-            name: "first_name",
-            type: "text",
-            validation: ["required"],
-          },
-          {
-            label: "Last name",
-            name: "last_name",
-            type: "text",
-            validation: ["required"],
-          },
-          {
-            label: "Email",
-            name: "email",
-            type: "email",
-            validation: ["required"],
-          },
-        ],
-      },
+      step: null,
+      formValues: {},
     };
+  },
+
+  methods: {
+    submitForm() {
+      api.submitForm(this.formValues).then((response) => {
+        this.step = response.data;
+      });
+    },
   },
 };
 </script>

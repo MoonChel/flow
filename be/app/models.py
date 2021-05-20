@@ -1,10 +1,13 @@
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 from pydantic import BaseModel
 
 
 class FormField(BaseModel):
     name: str
+    label: str
+    type: str
+    validation: List[str]
 
 
 class Form(BaseModel):
@@ -15,6 +18,7 @@ class Step(BaseModel):
     name: str
     active: bool
     form: Optional[Form]
+    form_value: Optional[Dict]
 
 
 class Process(BaseModel):
