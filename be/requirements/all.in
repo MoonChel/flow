@@ -1,6 +1,7 @@
 # base
 fastapi
 uvicorn[standard]
+aiofiles
 
 # test
 pytest

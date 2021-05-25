@@ -1,7 +1,10 @@
 import enum
-from fastapi import FastAPI, Request, HTTPException
 
+from starlette.responses import FileResponse
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+
+from .utils import gen_graph
 
 app = FastAPI()
 
@@ -184,6 +187,13 @@ async def get_process():
     return recruitment.dict()
 
 
+@app.get("/process-graph")
+async def get_process_graph():
+    graph_path = gen_graph(recruitment)
+
+    return FileResponse(graph_path, media_type="image/png")
+
+
 @app.get("/process-step")
 async def get_next_step():
     step = recruitment.get_active_step()
@@ -220,6 +230,12 @@ async def save_step_result(request: Request):
         if not next_next_step:
             raise HTTPException(404, f"Next step is not found: {next_next_step_name}")
 
+        next_step.form_value = {
+            "values": {
+                "next_step_name": next_next_step_name,
+            },
+            "action": step.form_value["action"],
+        }
         step.active = False
         next_next_step.active = True
 

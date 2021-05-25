@@ -13,6 +13,9 @@ const api = {
     },
     submitForm: (form) => {
         return client.post('/process-step', form)
+    },
+    getProcessGraph: () => {
+        return client.get('/process-graph', { responseType: 'blob' })
     }
 }
 
