@@ -1,0 +1,24 @@
+// recruitment_form
+digraph {
+	FILL_APPLICATION_FORM [label="New application form" shape=ellipse]
+	REVIEW_APPLICATION_FORM [label="Review application form" shape=ellipse]
+	CONDITION_REVIEW_FORM [label="Passed review for application form?" shape=diamond]
+	PHONE_INTERVIEW [label="Review phone interview" shape=ellipse]
+	CONDITION_REVIEW_PHONE_INTEVIEW [label="Passed phone interview?" shape=diamond]
+	REVIEW_FACE_TO_FACE_INTERVIEW [label="Review face to face inteview" shape=ellipse]
+	CONDITION_REVIEW_FACE_TO_FACE_INTERVIEW [label="Passed face to face interview?" shape=diamond]
+	APPROVE_APPLICANT [label="Approve applicant" shape=polygon]
+	REJECT_APPLICANT [label="Reject applicant" shape=polygon]
+	FILL_APPLICATION_FORM -> REVIEW_APPLICATION_FORM
+	REVIEW_APPLICATION_FORM -> CONDITION_REVIEW_FORM
+	CONDITION_REVIEW_FORM -> PHONE_INTERVIEW [label=yes]
+	CONDITION_REVIEW_FORM -> REJECT_APPLICANT [label=no]
+	PHONE_INTERVIEW -> CONDITION_REVIEW_PHONE_INTEVIEW
+	CONDITION_REVIEW_PHONE_INTEVIEW -> REVIEW_FACE_TO_FACE_INTERVIEW [label=yes]
+	CONDITION_REVIEW_PHONE_INTEVIEW -> REJECT_APPLICANT [label=no]
+	REVIEW_FACE_TO_FACE_INTERVIEW -> CONDITION_REVIEW_FACE_TO_FACE_INTERVIEW
+	CONDITION_REVIEW_FACE_TO_FACE_INTERVIEW -> APPROVE_APPLICANT [label=yes]
+	CONDITION_REVIEW_FACE_TO_FACE_INTERVIEW -> REJECT_APPLICANT [label=no]
+	APPROVE_APPLICANT -> FINISH
+	REJECT_APPLICANT -> FINISH
+}

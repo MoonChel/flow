@@ -7,6 +7,12 @@ require('spectre.css/dist/spectre.css')
 require('spectre.css/dist/spectre-exp.css')
 require('spectre.css/dist/spectre-icons.css')
 
+import Toasted from 'vue-toasted';
+
+Vue.use(Toasted, {
+  duration: 3000
+})
+
 import VueFormulate from '@braid/vue-formulate'
 
 Vue.use(VueFormulate)
